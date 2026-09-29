@@ -1,0 +1,203 @@
+/* =============================================
+   PARA JULIA — álbum romântico
+   =============================================
+   COMO PERSONALIZAR:
+   - Mude as cores em :root abaixo
+   - Mude o espaçamento entre fotos em .gallery (gap)
+   - Mude o tamanho das fotos em .frame img (max-width)
+============================================= */
+
+:root {
+  --bg: #f5f0e8;          /* cor de fundo geral */
+  --cream: #fffdf8;       /* cor da moldura da foto */
+  --ink: #2c2218;         /* cor do texto escuro */
+  --muted: #8c7b6e;       /* cor do texto suave / legendas */
+  --subtle: #c5b9ac;      /* linha divisória */
+  --shadow: rgba(44, 34, 24, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: 'Lora', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* oculta scrollbar mas mantém o scroll */
+::-webkit-scrollbar { width: 0; background: transparent; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.hero-sub {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 280px;
+  line-height: 1.8;
+}
+
+.hero-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4rem;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: var(--subtle);
+}
+
+.scroll-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--subtle);
+}
+
+/* ===== GALERIA ===== */
+.gallery {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* ← ESPAÇAMENTO ENTRE FOTOS — mude aqui */
+}
+
+/* blocos de posição */
+.photo-block {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.photo-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo-block.left  { align-items: flex-start; padding-left: 0; }
+.photo-block.right { align-items: flex-end; padding-right: 0; }
+.photo-block.center { align-items: center; }
+
+/* moldura estilo polaroid */
+.frame {
+  background: var(--cream);
+  padding: 10px 10px 42px 10px;
+  box-shadow:
+    0 2px 6px var(--shadow),
+    0 10px 40px rgba(44, 34, 24, 0.07);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: default;
+}
+
+.frame:hover {
+  box-shadow:
+    0 6px 20px var(--shadow),
+    0 20px 60px rgba(44, 34, 24, 0.12);
+  transform: scale(1.025) rotate(0deg) !important;
+}
+
+.frame img {
+  display: block;
+  width: 100%;
+  max-width: 300px;  /* ← TAMANHO DAS FOTOS — mude aqui */
+  height: 380px;
+  object-fit: cover;
+  object-position: center;
+  background: #e8ddd0;
+}
+
+/* legenda */
+.caption {
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 10px;
+  padding: 0 2px;
+  max-width: 300px;
+}
+
+/* ===== FECHAMENTO ===== */
+.closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 6rem 2rem 8rem;
+  gap: 2rem;
+}
+
+.closing-line {
+  width: 1px;
+  height: 48px;
+  background: var(--subtle);
+}
+
+.closing-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  color: var(--ink);
+}
+
+.closing-text {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 300px;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 480px) {
+  .gallery {
+    gap: 2rem;
+  }
+  .frame img {
+    max-width: 260px;
+    height: 320px;
+  }
+
+}
